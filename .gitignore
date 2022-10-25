@@ -25,3 +25,40 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+
+# Avoid committing package configuration:
+# https://dart.dev/tools/pub/package-layout#package-configuration
+.packages
+
+# Avoid committing build/ directory:
+# https://dart.dev/tools/pub/package-layout#build
+build/
+
+# Avoid committing generated files:
+# https://dart.dev/tools/pub/package-layout#generated
+lib/src/generated/
+
+# Avoid committing IDE related files:
+# https://dart.dev/tools/pub/package-layout#ide-files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.sublime-workspace
+*.sublime-project
+*.atom/
+*.vs/
+*.vscode/
+*.idea/
+
+# Avoid committing files that are specific to your local machine:
+# https://dart.dev/tools/pub/package-layout#machine-specific-files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
