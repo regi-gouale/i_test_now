@@ -17,3 +17,4 @@ jobs:
         with:
           workingDir: 'web'
           webRenderer: 'canvaskit'
+          baseHref: '/i-test-now/'
