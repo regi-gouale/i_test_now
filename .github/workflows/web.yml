@@ -8,11 +8,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    tiumeout-minutes: 10
     steps:
-      - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@v3
         with:
+          token: ${{ secrets.COMMIT_SECRET }}
+
+      - name: Repository
+        id: version
+        run: |
+          REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+          echo "::set-output name=repository::$REPOSITORY"
+
+      - name: Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.5'
           channel: 'stable'
+          cache: 'true'
+
       - run: flutter --version
       - run: flutter upgrade 
 
@@ -20,12 +34,10 @@ jobs:
         run: flutter pub get
 
       - name: Build web
-        run: flutter build web
+        run: flutter build web --release --web-renderer html
 
       - name: Deploy to GitHub Pages
-        uses:
-          actions/github-pages@v1
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          github-token: ${{ secrets.COMMIT_SECRET }}
-          publish-dir: ./build/web
-          
+          github_token: ${{ secrets.COMMIT_SECRET }}
+          publish_dir: ./build/web
